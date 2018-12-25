@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+/usr/bin/python2.7 /var/runtime/awslambda/bootstrap.py

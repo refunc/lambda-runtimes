@@ -1,0 +1,11 @@
+apiVersion: k8s.refunc.io/v1beta3
+kind: Xenv
+metadata:
+  name: nodejs8.10
+spec:
+  type: lambda
+  transport: nats
+  poolSize: 1
+  container:
+    image: refunc/lambda:nodejs8.10
+    imagePullPolicy: IfNotPresent

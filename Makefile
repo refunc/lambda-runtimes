@@ -40,3 +40,9 @@ else
 test-%: % bin/linux/runner
 	docker run --rm -it -v $$(pwd)/examples/$*:/var/task -v $$(pwd)/bin/linux/runner:/bin/runner --entrypoint=/bin/bash refunc/lambda:$* ./test.sh
 endif
+
+push: $(runtimes)
+	@for img in $(runtimes); do \
+	log_info "pushing refunc/lambda:$${img}" ; \
+	docker push refunc/lambda:$${img}; \
+	done

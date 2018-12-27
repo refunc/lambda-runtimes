@@ -48,7 +48,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:71681ed18d4b8a527db1b510d3046fd357d6c94e9f424f674166bd5bac07437d"
+  digest = "1:a0a5bfdde582835cebaea720d87a709116941bd0ee834afc2a95c1325a4b1a38"
   name = "github.com/refunc/refunc"
   packages = [
     "pkg/messages",
@@ -61,7 +61,7 @@
     "pkg/utils/logtools",
   ]
   pruneopts = "UT"
-  revision = "50a4848de4ad97a0daa9d3f014ebe37eed66e190"
+  revision = "658117ddbb0f8e655fc98a0b3b478087934eb7e7"
 
 [[projects]]
   digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"

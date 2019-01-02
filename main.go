@@ -18,6 +18,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gorilla/mux"
 	observer "github.com/refunc/go-observer"
 	"github.com/refunc/refunc/pkg/messages"
 	"github.com/refunc/refunc/pkg/runtime/types"
@@ -80,31 +81,30 @@ func main() {
 		car.Serve(ctx, carAddr)
 	}()
 
-	go func() {
-		defer cancel()
-		for i := 0; i < 200; i++ {
-			res, err := http.Get("http://" + carAddr + "/2018-06-01/ping")
-			if err != nil {
-				select {
-				case <-ctx.Done():
-					return
-				case <-time.After(5 * time.Millisecond):
-					continue
-				}
-			}
-			defer res.Body.Close()
-
-			body, err := ioutil.ReadAll(res.Body)
-			if err != nil || string(body) != "pong" {
-				klog.Error("loader: failed to reqeust api")
+	for i := 0; i < 200; i++ {
+		res, err := http.Get("http://" + carAddr + "/2018-06-01/ping")
+		if err != nil {
+			select {
+			case <-ctx.Done():
 				return
+			case <-time.After(5 * time.Millisecond):
+				continue
 			}
-			break
 		}
-		if err := cmd.Run(); err != nil {
-			klog.Error(err)
+		defer res.Body.Close()
+
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil || string(body) != "pong" {
+			klog.Error("loader: failed to reqeust api")
+			return
 		}
-	}()
+		break
+	}
+
+	if err := cmd.Start(); err != nil {
+		klog.Error(err)
+		return
+	}
 
 	var exit bool
 	select {
@@ -117,7 +117,19 @@ func main() {
 
 	if !exit && cmd.Process != nil {
 		cmd.Process.Signal(os.Interrupt)
-		cmd.Wait()
+		// kill when timeout of 5s
+		go func() {
+			select {
+			case <-time.After(5 * time.Second):
+				if cmd.Process != nil {
+					cmd.Process.Kill()
+				}
+			case <-ctx.Done():
+			}
+		}()
+		if err := cmd.Wait(); err != nil {
+			klog.Warningf("process exited with error, %v", err)
+		}
 	}
 }
 
@@ -224,6 +236,8 @@ func newEngine() sidecar.Engine {
 	return eng
 }
 
+func (eng *engine) Name() string { return "stdinout" }
+
 func (eng *engine) Init(ctx context.Context, fn *types.Function) error {
 	// start ioloop
 	go func() {
@@ -302,6 +316,8 @@ func (eng *engine) ReportReady() {
 func (eng *engine) ReportExiting() {
 	klog.Infoln("(stdiocar) ReportExiting")
 }
+
+func (eng *engine) RegisterServices(router *mux.Router) {}
 
 func getEnviron(key, alter string) string {
 	if v, ok := os.LookupEnv(key); ok {

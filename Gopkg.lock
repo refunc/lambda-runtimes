@@ -48,7 +48,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:a0a5bfdde582835cebaea720d87a709116941bd0ee834afc2a95c1325a4b1a38"
+  digest = "1:312125cff426e5fb2c193144899e788ea14ce250dbf4123711c10c2e77b88122"
   name = "github.com/refunc/refunc"
   packages = [
     "pkg/messages",
@@ -61,7 +61,7 @@
     "pkg/utils/logtools",
   ]
   pruneopts = "UT"
-  revision = "658117ddbb0f8e655fc98a0b3b478087934eb7e7"
+  revision = "2a0820638d7094a5618513d43413e4d49d200785"
 
 [[projects]]
   digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"
@@ -86,6 +86,7 @@
     "github.com/aws/aws-lambda-go/events",
     "github.com/aws/aws-lambda-go/lambda",
     "github.com/aws/aws-lambda-go/lambda/messages",
+    "github.com/gorilla/mux",
     "github.com/refunc/go-observer",
     "github.com/refunc/refunc/pkg/messages",
     "github.com/refunc/refunc/pkg/runtime/types",

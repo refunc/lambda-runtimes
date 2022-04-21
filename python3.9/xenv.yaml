@@ -1,0 +1,11 @@
+apiVersion: k8s.refunc.io/v1beta3
+kind: Xenv
+metadata:
+  name: python3.9
+spec:
+  type: lambda
+  transport: nats
+  poolSize: 1
+  container:
+    image: refunc/lambda:python3.9
+    imagePullPolicy: IfNotPresent

@@ -1,3 +1,0 @@
-#!/bin/bash -e
-
-/var/lang/bin/node --expose-gc --max-semi-space-size=150 --max-old-space-size=2707 /var/runtime/node_modules/awslambda/index.js

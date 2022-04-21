@@ -4,21 +4,14 @@ Lambda Runtime images and [Xenvs](https://github.com/refunc/refunc/blob/7bb8d133
 
 ## How it works
 
-We use image from [lambci/docker-lambda](https://github.com/lambci/docker-lambda) as base image for each runtime, and convert it's runtime to [aws cunstom runtime](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html) in order to run old runtimes on refunc
+We use aws lambda runtime interface client for each runtime, eg [aws-lambda-python-runtime-interface-client](https://github.com/aws/aws-lambda-python-runtime-interface-client), and convert it's runtime to [aws cunstom runtime](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html) in order to run lambda on refunc.
 
 ## Supported runtimes
 
-- [x] prvoided
 - [x] python3.7
-- [x] ruby2.5
-- [x] python3.6
-- [x] python2.7
-- [x] nodejs8.10
-- [x] nodejs6.10
-- [ ] java8
-- [ ] go1.x
-- [ ] dotnetcore2.1
-- [ ] dotnetcore2.0
+- [x] python3.8
+- [x] python3.9
+- [x] golang1.17
 
 ## Dev in local docker without a k8s cluster
 

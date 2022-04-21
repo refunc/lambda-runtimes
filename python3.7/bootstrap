@@ -1,0 +1,19 @@
+#!/usr/bin/env python3.7
+
+import os
+import sys
+from awslambdaric.bootstrap import run
+
+
+def main():
+    app_root = os.getcwd()
+    if app_root not in sys.path:
+        sys.path.insert(0, app_root)
+    handler = os.environ["_HANDLER"] if os.environ["_HANDLER"] else os.environ["AWS_LAMBDA_FUNCTION_HANDLER"]
+    lambda_runtime_api_addr = os.environ["AWS_LAMBDA_RUNTIME_API"]
+
+    run(app_root, handler, lambda_runtime_api_addr)
+
+
+if __name__ == "__main__":
+    main()

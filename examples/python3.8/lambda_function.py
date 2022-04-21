@@ -1,7 +1,7 @@
 import os
 import sys
 
-# docker run --rm -v "$PWD":/var/task refunc/lambda:python3.7 lambda_function.lambda_handler
+# docker run --rm -v "$PWD":/var/task refunc/lambda:python3.8 lambda_function.lambda_handler
 
 
 def lambda_handler(event, context):

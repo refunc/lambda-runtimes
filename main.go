@@ -109,6 +109,7 @@ func main() {
 	var exit bool
 	select {
 	case <-closeC:
+		<-time.After(20 * time.Millisecond)
 	case sig := <-cmdutil.GetSysSig():
 		klog.Infof(`received signal "%v", exiting...`, sig)
 	case <-ctx.Done():
@@ -120,7 +121,7 @@ func main() {
 		// kill when timeout of 5s
 		go func() {
 			select {
-			case <-time.After(5 * time.Second):
+			case <-time.After(2 * time.Second):
 				if cmd.Process != nil {
 					cmd.Process.Kill()
 				}

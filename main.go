@@ -138,9 +138,7 @@ func prepare(ctx context.Context) *exec.Cmd {
 
 	// prepare locals
 	var env []string
-	for _, kv := range os.Environ() {
-		env = append(env, kv)
-	}
+	env = append(env, os.Environ()...)
 	for k, v := range fn.Spec.Runtime.Envs {
 		if v != "" {
 			// try to expand env
@@ -290,10 +288,11 @@ func (eng *engine) InvokeRequest() *messages.InvokeRequest {
 	return nil
 }
 
-func (eng *engine) SetResult(rid string, body []byte, err error) error {
+func (eng *engine) SetResult(rid string, body []byte, err error, conentType string) error {
 	os.Stdout.Write(messages.MustFromObject(&messages.InvokeResponse{
-		Payload: body,
-		Error:   messages.GetErrorMessage(err),
+		Payload:     body,
+		Error:       messages.GetErrorMessage(err),
+		ContentType: conentType,
 	}))
 	os.Stdout.Write([]byte{'\n'})
 	os.Stdout.Sync()

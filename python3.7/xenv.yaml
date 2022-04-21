@@ -7,5 +7,5 @@ spec:
   transport: nats
   poolSize: 1
   container:
-    image: lambci/lambda:python3.7
+    image: refunc/lambda:python3.7
     imagePullPolicy: IfNotPresent

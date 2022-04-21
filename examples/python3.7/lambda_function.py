@@ -1,7 +1,5 @@
-from __future__ import print_function
 import os
 import sys
-import subprocess
 
 # Just a test lambda, run with:
 # docker run --rm -v "$PWD":/var/task lambci/lambda:python2.7
@@ -27,7 +25,7 @@ def lambda_handler(event, context):
     print(__file__)
     print(os.environ)
     print(context.__dict__)
-
+    print("--------------------")
     return {
         "executable": str(sys.executable),
         "sys.argv": str(sys.argv),

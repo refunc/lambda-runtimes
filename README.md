@@ -11,6 +11,7 @@ We use aws lambda runtime interface client for each runtime, eg [aws-lambda-pyth
 - [x] python3.7
 - [x] python3.8
 - [x] python3.9
+- [x] nodejs12.x
 - [x] golang1.17
 
 ## Dev in local docker without a k8s cluster

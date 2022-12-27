@@ -40,4 +40,4 @@ obj
 examples/java/build
 go1.x/run/aws-lambda-mock
 go1.x/run/vendor
-examples/golang1.17/lambda_handler
+examples/golang1.x/lambda_handler

@@ -4,7 +4,7 @@ export BASH_ENV=scripts/common
 GOOS := $(shell eval $$(go env); echo $${GOOS})
 ARCH := $(shell eval $$(go env); echo $${GOARCH})
 
-runtimes := python3.9 python3.8 python3.7 golang1.x nodejs12.x
+runtimes := python3.10 python3.9 python3.8 python3.7 golang1.x nodejs12.x
 
 runner: bin/$(GOOS)/runner
 
